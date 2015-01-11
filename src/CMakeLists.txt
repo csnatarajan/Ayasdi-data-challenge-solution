@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 2.8)
+set(SOURCES
+	driver.cpp
+)
+include_directories(${Trilinos_INCLUDE_DIRS})
+include_directories(${Trilinos_TPL_INCLUDE_DIRS})
+include_directories(${PCA_SOURCE_DIR}/inc)
+include_directories("/hpcdata/natac0/pnetcdf/include")
+include_directories("/hpcdata/natac0/hdf/include")
+include_directories("/hpcdata/natac0/dlib-18.6")
+link_directories(${Trilinos_LIBRARY_DIRS})
+link_directories(${Trilinos_TPL_LIBRARY_DIRS})
+link_directories("/hpcdata/natac0/pnetcdf/lib")
+link_directories("/hpcdata/natac0/hdf5/lib")
+set(EXECUTABLE_OUTPUT_PATH ${PCA_SOURCE_DIR}/bin)
+add_executable(PCA ${SOURCES})
+target_link_libraries(PCA ${Trilinos_LIBRARIES} "-lz" "-limf" "-lhdf5" "-lpnetcdf")
